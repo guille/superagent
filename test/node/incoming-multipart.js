@@ -17,6 +17,7 @@ app.get('/', function(req, res){
   res.write('\r\n');
   res.write('tobi');
   res.write('\r\n--awesome--');
+  res.end();
 });
 
 app.listen(3006);
@@ -25,7 +26,10 @@ describe('request multipart/form-data', function(){
   describe('req.body', function(){
     it('should be populated with fields', function(done){
       request.get('http://localhost:3006/', function(res){
-        console.log(res);
+        console.log(res.status);
+        console.log(res.body);
+        console.log(res.files);
+        console.log(res.text);
       });
     })
   })

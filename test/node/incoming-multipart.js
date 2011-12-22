@@ -22,12 +22,12 @@ app.get('/', function(req, res){
   res.end();
 });
 
-app.listen(3006);
+app.listen(3007);
 
 describe('request multipart/form-data', function(){
   describe('req.body', function(){
     it('should be populated with fields', function(done){
-      request.get('http://localhost:3006/', function(res){
+      request.get('http://localhost:3007/', function(res){
         res.status.should.equal(200);
         res.body.should.eql({ name: 'tobi' });
         res.files.image.name.should.equal('something.png');

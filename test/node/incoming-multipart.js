@@ -29,7 +29,7 @@ describe('request multipart/form-data', function(){
         console.log(res.status);
         console.log(res.body);
         console.log(res.files);
-        console.log(res.text);
+        assert(null == res.text, 'res.text should be empty for multipart');
       });
     })
   })

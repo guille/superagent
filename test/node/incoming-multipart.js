@@ -28,10 +28,12 @@ describe('request multipart/form-data', function(){
   describe('req.body', function(){
     it('should be populated with fields', function(done){
       request.get('http://localhost:3006/', function(res){
-        console.log(res.status);
-        console.log(res.body);
-        console.log(res.files);
+        res.status.should.equal(200);
+        res.body.should.eql({ name: 'tobi' });
+        res.files.image.name.should.equal('something.png');
+        res.files.image.type.should.equal('image/png');
         assert(null == res.text, 'res.text should be empty for multipart');
+        done();
       });
     })
   })

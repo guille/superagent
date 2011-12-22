@@ -43,7 +43,7 @@ describe('Part', function(){
         req.end(function(res){
           var ct = res.header['content-type'];
           ct.should.include.string('multipart/mixed; boundary="');
-          console.log(res.body);
+          // console.log(res.body);
         });
       })
     })

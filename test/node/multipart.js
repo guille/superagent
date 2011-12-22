@@ -32,18 +32,22 @@ describe('Request', function(){
 describe('Part', function(){
   describe('#pipe()', function(){
     describe('with a single part', function(){
-      it('should construct a multipart request', function(){
+      it('should construct a multipart request', function(done){
         var req = request.post('http://localhost:3005/echo');
 
         req
           .part()
+          .set('Content-Disposition', 'attachment; name="image"; filename="image.png"')
           .set('Content-Type', 'image/png')
           .write('some image data');
 
         req.end(function(res){
           var ct = res.header['content-type'];
           ct.should.include.string('multipart/mixed; boundary="');
-          // console.log(res.body);
+          res.body.should.eql({});
+          res.files.image.name.should.equal('image.png');
+          res.files.image.type.should.equal('image/png');
+          done();
         });
       })
     })

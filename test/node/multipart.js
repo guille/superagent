@@ -61,7 +61,15 @@ describe('Part', function(){
           .set('Content-Type', 'image/png')
           .set('Content-Disposition', 'attachment; filename="myimage.png"')
           .write('some image data');
-    
+
+        var part = req.part()
+          .set('Content-Type', 'image/png')
+          .set('Content-Disposition', 'attachment; filename="another.png"')
+
+        part.write('random');
+        part.write('thing');
+        part.write('here');
+
         var part = req.part()
           .set('Content-Disposition', 'form-data; name="name"')
           .set('Content-Type', 'text/plain')
@@ -69,6 +77,7 @@ describe('Part', function(){
     
         req.end(function(res){
           console.log(res.body);
+          console.log(Object.keys(res.files));
           res.files['myimage.png'].constructor.name.should.equal('File');
         });
       })

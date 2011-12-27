@@ -57,6 +57,11 @@ describe('Part', function(){
 
         var req = request.post('http://localhost:3005/echo');
 
+        req.request().write = function(data){
+          data = data.replace(/\r/g, '\\r').replace(/\n/g, '\\n\n');
+          process.stdout.write(data);
+        };
+
         req.part()
           .set('Content-Type', 'image/png')
           .set('Content-Disposition', 'attachment; filename="myimage.png"')

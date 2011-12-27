@@ -54,9 +54,9 @@ describe('Part', function(){
 
     describe('with several parts', function(){
       it('should construct a multipart request', function(done){
-    
+
         var req = request.post('http://localhost:3005/echo');
-    
+
         req.part()
           .set('Content-Type', 'image/png')
           .set('Content-Disposition', 'attachment; filename="myimage.png"')
@@ -70,11 +70,11 @@ describe('Part', function(){
         part.write('thing');
         part.write('here');
 
-        var part = req.part()
+        req.part()
           .set('Content-Disposition', 'form-data; name="name"')
           .set('Content-Type', 'text/plain')
           .write('tobi');
-    
+
         req.end(function(res){
           console.log(res.body);
           console.log(Object.keys(res.files));

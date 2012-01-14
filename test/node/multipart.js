@@ -43,7 +43,7 @@ describe('Part', function(){
 
         req.end(function(res){
           var ct = res.header['content-type'];
-          ct.should.include.string('multipart/mixed; boundary="');
+          ct.should.include.string('multipart/form-data; boundary="');
           res.body.should.eql({});
           res.files.image.name.should.equal('image.png');
           res.files.image.type.should.equal('image/png');
